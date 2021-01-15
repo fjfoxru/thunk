@@ -185,9 +185,8 @@ export const fetchServiceItem = (id) => async (dispatch) => {
 
 
 
-export const addService = () => async (dispatch, getState) => {
+export const addService = (name, price) => async (dispatch) => {
   dispatch(addServiceRequest());
-  const {serviceAdd: {item: {name, price}}} = getState();
 
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
@@ -202,12 +201,11 @@ export const addService = () => async (dispatch, getState) => {
   } catch (e) {
     dispatch(addServiceFailure(e.message));
   }
-  fetchServices(dispatch);
+  dispatch(fetchServices());
 }
 
-export const saveEditedServiceItem = () => async (dispatch, getState) => {
+export const saveEditedServiceItem = (item) => async (dispatch) => {
   dispatch(saveEditedServiceItemRequest());
-  const {serviceSaveItemEdited: {item}} = getState();
 
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
@@ -222,11 +220,11 @@ export const saveEditedServiceItem = () => async (dispatch, getState) => {
   } catch (e) {
     dispatch(saveEditedServiceItemFailure(e.message));
   }
-  fetchServices(dispatch);
+  dispatch(fetchServices());
 }
 
 
-export const removeService = async (dispatch, id) => {
+export const removeService = (id) => async (dispatch) => {
   dispatch(removeServiceRequest());
   
   try {
@@ -241,5 +239,5 @@ export const removeService = async (dispatch, id) => {
   } catch (e) {
     dispatch(removeServiceFailure(e.message));
   }
-  fetchServices(dispatch);
+  dispatch(fetchServices());
 }
