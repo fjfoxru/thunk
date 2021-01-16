@@ -149,7 +149,7 @@ export const removeServiceSuccess = () => ({
 
 
 
-export const fetchServices = async (dispatch) => {
+export const fetchServices = () => async (dispatch) => {
   dispatch(fetchServicesRequest());
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}`)

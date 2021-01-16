@@ -12,7 +12,7 @@ function ServiceItem({match}) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchServiceItem(dispatch, match.params.id)
+        dispatch(fetchServiceItem(match.params.id))
         return () => {
           dispatch(changeServiceClear());
         }
